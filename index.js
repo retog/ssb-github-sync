@@ -5,9 +5,15 @@ import pull from 'pull-stream'
 import repositoryIndex from './lib/RepositoryIndex.js'
 import cloneRepositorioes from './lib/CloneRepositories.js'
 import pushToGithub from './lib/PushToGithub.js'
+import addGithubUri from './lib/AddGithubUri.js'
 
 fs.mkdtemp(path.join(os.tmpdir(), 'ssb-github-'), (err, folder) => {
   if (err) throw err;
-  pull(repositoryIndex(), cloneRepositorioes(folder), pushToGithub('git@github.com:retog/'), pull.log())
+  pull(
+    repositoryIndex(), 
+    cloneRepositorioes(folder), 
+    addGithubUri('git@github.com:retog/'), 
+    pushToGithub(), 
+    pull.log())
 });
 
