@@ -10,7 +10,8 @@ import addGithubUri from './lib/AddGithubUri.js'
 fs.mkdtemp(path.join(os.tmpdir(), 'ssb-github-'), (err, folder) => {
   if (err) throw err;
   pull(
-    repositoryIndex(), 
+    repositoryIndex(),
+    pull.filter(r => r.name),
     cloneRepositorioes(folder), 
     addGithubUri('git@github.com:retog/'), 
     pushToGithub(), 
